@@ -1,0 +1,36 @@
+Query 1:
+mysql> select passenger_name from passenger where passenger_name like "_e%";
++----------------+
+| passenger_name |
++----------------+
+| Nethra         |
++----------------+
+1 row in set (0.00 sec)
+
+Query 2:
+mysql> select passenger_name from passenger where passenger_dob = (select max(passenger_dob) from passenger);
++----------------+
+| passenger_name |
++----------------+
+| Smita          |
++----------------+
+1 row in set (0.00 sec)
+
+Query 3:
+mysql> select count(flightsource) as count from flight where flightsource = 'Kolkata';
++-------+
+| count |
++-------+
+|     2 |
++-------+
+1 row in set (0.00 sec)
+Query 4:
+mysql> select p.passenger_name from passenger p join booking_details bd on p.passenger_id=bd.passenger_id group by p.passenger_id having count(bd.booking_id)>1;
++----------------+
+| passenger_name |
++----------------+
+| Ram            |
+| Rajan          |
+| Smita          |
++----------------+
+3 rows in set (0.00 sec)
